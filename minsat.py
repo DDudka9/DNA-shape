@@ -1,9 +1,13 @@
+### FIRST: RUN THIS ###
+
 import subprocess
 import regex
 import csv
 import statistics
 from Bio import SeqIO
 from Bio import SearchIO
+
+# change path to folder where you downloaded fasta reads
 path = "/Users/damian/Downloads/sratoolkit.3.1.1-mac-arm64/bin/SRR11606870/fasta/"
 
 # get all records with the consensus ATTCGTTGGAAACGGGA seq used in Packiaraj and Thakur 2024 Genome Biol for Min sat
@@ -12,14 +16,22 @@ Min_iterator = (record for record in input_iterator if "ATTCGTTGGAAACGGGA" in re
                     and "GAAAACTGAAAA" not in record.seq)  # avoid mixed zone of Maj and Min sat
 SeqIO.write(Min_iterator, path + "SRR11606870_Min.fasta", "fasta")
 
-# make blast database locally
+# make blast database locally (modify path to match the path with downloaded fasta reads)
 cmd = "makeblastdb -in /Users/damian/Downloads/sratoolkit.3.1.1-mac-arm64/bin/SRR11606870/fasta/SRR11606870_Min.fasta -dbtype nucl"
 subprocess.run(cmd, shell=True)
 
-# blast representative Type 1 Continuous Min sat array from Packiaraj and Thakur 2024 Genome Biol (111923)
-path2 = "/Users/damian/Downloads/sratoolkit.3.1.1-mac-arm64/bin/SRR11606870/fasta/SRR11606870_Min.fasta"
-homo_cont_array_path = path + "SRR11606870_111923.fasta"  # make sure this read as fasta file is in the same folder
-outpath = "/Users/damian/Downloads/sratoolkit.3.1.1-mac-arm64/bin/SRR11606870/fasta/SRR11606870_Min.xml"
+### ------------------------------------------------------------------------------------------###
+
+### SECOND: Generate a fasta file with the SRR11606870_111923 array inside the path directory ###
+
+### ------------------------------------------------------------------------------------------###
+
+### THIRD: RUN THIS ###
+
+# blast representative Type 1 Continuous Min sat array (111923) from Packiaraj and Thakur 2024 Genome Biol (PMID: 38378611)
+path2 = path + "SRR11606870_Min.fasta"
+homo_cont_array_path = path + "SRR11606870_111923.fasta"  # make sure this read fasta file is in the same folder
+outpath = path + "SRR11606870_Min.xml"
 cmd3 = "blastn -db " + path2 + " -query " + homo_cont_array_path + " -outfmt 5 -out " + outpath
 subprocess.run(cmd3, shell=True)
 
@@ -89,7 +101,7 @@ with open(path + "SRR11606870_Min_blasted_oneliner_min4ATs.csv", "w") as f:
     write = csv.writer(f)
     write.writerow(density_list)
 
-# Compute most narrow tetranucleotides from Rohs et al., 2009 Nature
+# Compute most narrow tetranucleotides from Rohs et al., 2009 Nature (PMID: 19865164)
 ATs = ["AAAT", "AATA", "AATC", "AATT", "AAAA", "AAGT", "GAAT", "GAAA", "TAAT", "AAAC", "ATAA",
        "AGAT", "AAGA", "AGTT", "AGAA", "AAAG", "ATAG", "GAAC", "CGTT", "TATA"]
 Min_sat_ATstretches = {}
@@ -148,10 +160,10 @@ with open(path + "SRR11606870_111923_oneliner.fasta", "r") as f:
 bin_size = 1000
 num_bins = (len(seq) + bin_size - 1) // bin_size  # number of bins needed
 
+### Use sliding window to get tetras overlapping and their positions
+
 # Get dict where each tetra will get its frequency
 Min_freq_dict = {bin_index: {tetra: 0 for tetra in narrow_ATs} for bin_index in range(num_bins)}
-
-# Use sliding window to get tetras
 for i in range(len(seq) - 3):
     # Get current tetra
     current_tetra = seq[i:i + 4]
