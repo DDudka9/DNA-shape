@@ -10,7 +10,7 @@ from Bio import SearchIO
 # change path to folder where you downloaded fasta reads
 path = "/Users/damian/Downloads/sratoolkit.3.1.1-mac-arm64/bin/SRR11606870/fasta/"
 
-# get all records with the consensus GAAAACTGAAAA seq used in Packiaraj and Thakur 2024 Genome Biol for Maj sat
+# get all records with the GAAAACTGAAAA motif specific to major satellite
 input_iterator = SeqIO.parse(path + "SRR11606870.fasta", "fasta")
 Maj_iterator = (record for record in input_iterator if "GAAAACTGAAAA" in record.seq
                     and "ATTCGTTGGAAACGGGA" not in record.seq)  # avoid mixed zone of Maj and Min sat
