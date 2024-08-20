@@ -2,8 +2,8 @@
 
 The scripts allow computing the number of contigous A/T stretches (default set to length of 4) from SRA assemblies. 
 
-To extract Major and Minor satellite arrays from SRR11606870 long read _Mus musculus_ assembly 
-(Ton et al., Scientific Data 2020; PMID: 33203859):
+To analyse stretches in Major and Minor satellite arrays from SRR11606870 long read _Mus musculus_ assembly 
+(Ton et al., Scientific Data 2020; PMID: 33203859) follow this:
 1. Download sra-tools (https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit)
     Useful wiki: https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump
     Useful blog: https://edwards.flinders.edu.au/fastq-dump/
