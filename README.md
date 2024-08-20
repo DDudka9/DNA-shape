@@ -1,9 +1,14 @@
 # DNA-shape
 
-The scripts allow computing the number of contigous A/T stretches (default set to length of 4) from SRA assemblies. 
+Operating system: MacOS Ventura
+Language: Python 3.11
 
-To analyse stretches in Major and Minor satellite arrays from SRR11606870 long read _Mus musculus_ assembly 
-(Ton et al., Scientific Data 2020; PMID: 33203859) follow this:
+Based on long read SRR11606870 assembly of_Mus musculus_(Ton et al., Scientific Data 2020; PMID: 33203859), 
+and using Packiaraj and Thakur 2024 Genome Biol (PMID: 38378611) major and minor satellite reads as templates, the scripts allow computing:
+1. Number of contigous A/T stretches (default set to length of 4)
+2. Number of tetranucleotides associated with narrow minor groove (Rohs et al., 2009 Nature; PMID: 19865164)
+
+Instructions:
 1. Download sra-tools (https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit)
     Useful wiki: https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump
     Useful blog: https://edwards.flinders.edu.au/fastq-dump/
