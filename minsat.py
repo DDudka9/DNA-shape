@@ -22,11 +22,12 @@ subprocess.run(cmd, shell=True)
 
 ### ------------------------------------------------------------------------------------------###
 
-### SECOND: Generate a fasta file with the SRR11606870_111923 array inside the path directory ###
+### SECOND: Copy the SRR11606870_111923.fasta file from github cloned folder into the path directory
+# if you havent done it yet ###
 
 ### ------------------------------------------------------------------------------------------###
 
-### THIRD: RUN THIS ###
+### THIRD: RUN THE REST OF THE CODE ###
 
 # blast representative Type 1 Continuous Min sat array (111923) from Packiaraj and Thakur 2024 Genome Biol (PMID: 38378611)
 path2 = path + "SRR11606870_Min.fasta"
@@ -81,7 +82,7 @@ with open(path + "SRR11606870_Min_blasted_oneliner.fasta", "r") as f:
             Min_sat_ATstretches[id] = read, ATstretches, nr_stretches, density
 
 # write into file
-with open(path + "SRR11606870_Min_blasted_oneliner_min4ATs.fasta", 'w') as convert_file:
+with open(path + "SRR11606870_Min_ATstretches_average.fasta", 'w') as convert_file:
     for k, v in Min_sat_ATstretches.items():
         convert_file.write(k.rstrip("\n"))
         convert_file.write("\n")
@@ -97,7 +98,7 @@ with open(path + "SRR11606870_Min_blasted_oneliner_min4ATs.fasta", 'w') as conve
     convert_file.write("\nAll densities of stretches per 234bp = %s" % density_list)
 
 # Save densities into file
-with open(path + "SRR11606870_Min_blasted_oneliner_min4ATs.csv", "w") as f:
+with open(path + "SRR11606870_Min_ATstretches_average.csv", "w") as f:
     write = csv.writer(f)
     write.writerow(density_list)
 
@@ -123,7 +124,7 @@ with open(path + "SRR11606870_Min_blasted_oneliner.fasta", "r") as f:
             read = line.rstrip("\n")
             nr_stretches = 0
             for stretch in ATs:
-                ATstretches = regex.findall(stretch, read, overlapped=False)
+                ATstretches = regex.findall(stretch, read, overlapped=True)
                 stretches[stretch] = len(ATstretches)
                 nr_stretches += len(ATstretches)
                 stretches_total[stretch] += len(ATstretches)
@@ -133,7 +134,7 @@ with open(path + "SRR11606870_Min_blasted_oneliner.fasta", "r") as f:
             density_list.append(density)
             Min_sat_ATstretches[id] = read, stretches, nr_stretches, density, length
 
-with open(path + "SRR11606870_Min_blasted_oneliner_Rohs.fasta", 'w') as convert_file:
+with open(path + "SRR11606870_Min_teranucleotides_average.fasta", 'w') as convert_file:
     for k, v in Min_sat_ATstretches.items():
         convert_file.write(k.rstrip("\n"))
         convert_file.write("\n")
@@ -151,12 +152,18 @@ with open(path + "SRR11606870_Min_blasted_oneliner_Rohs.fasta", 'w') as convert_
 
 narrow_ATs = ["AAAT", "AATA", "AATC", "AATT", "AAAA", "AAGT", "GAAT", "GAAA", "TAAT", "AAAC"]
 
-with open(path + "SRR11606870_111923_oneliner.fasta", "r") as f:
+with open(path + "SRR11606870_Min_blasted_oneliner.fasta", "r") as f:
     lines = f.readlines()
     total_length = 0
+    wanted_array = False
     for line in lines:
-        if not line.startswith(">"):
+        # select the array you want to analyze (change ID number)
+        if "111923" in line:
+            wanted_array = True
+        if not line.startswith(">") and wanted_array:
             seq = line.rstrip("\n")
+            break
+
 bin_size = 1000
 num_bins = (len(seq) + bin_size - 1) // bin_size  # number of bins needed
 
@@ -174,7 +181,7 @@ for i in range(len(seq) - 3):
         Min_freq_dict[bin_index][current_tetra] += 1
 
 #  write into file (with help from https://stackoverflow.com/questions/29400631/python-writing-nested-dictionary-to-csv)
-with open(path + "SRR11606870_111923_ATs_binned.csv", "w") as csvfile:
+with open(path + "SRR11606870_Min_tetranucleotides.csv", "w") as csvfile:
     writer = csv.DictWriter(csvfile, narrow_ATs)
     for key, val in sorted(Min_freq_dict.items()):
         row = {"AAAT": key}
