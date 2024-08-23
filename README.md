@@ -35,8 +35,8 @@ Run the scripts (in Pycharm 2023.2.5 Community Edition)
 5. The output should appear in the folder with SRR11606870_2342980.fasta and SRR11606870_111923.fasta files 
 
 Expected output files:
-1. SRR11606870_Maj_2342980_tetranucleotides.csv - Spreadsheet where each column represents a number of tetranucleotides with narrow major groove (order: AAAT; AATA; AATC; AATT; AAAA; AAGT; GAAT; GAAA; TAAT; AAAC) per 1kb in a representative major satellite array (SRR11606870_2342980)
-2. SRR11606870_Min_111923_tetranucleotides.csv - Spreadsheet where each column represents a number of tetranucleotides with narrow minor groove (order: AAAT; AATA; AATC; AATT; AAAA; AAGT; GAAT; GAAA; TAAT; AAAC) per 1kb in a representative minor satellite array (SRR11606870_111923)
+1. SRR11606870_Maj_2342980_tetranucleotides.csv - Spreadsheet where each column represents a number of tetranucleotides with narrow major groove (order: AAAT; AATA; AATC; AATT; AAAA; AAGT; GAAT; GAAA; TAAT; AAAC) per 1kb along a representative major satellite array (SRR11606870_2342980)
+2. SRR11606870_Min_111923_tetranucleotides.csv - Spreadsheet where each column represents a number of tetranucleotides with narrow minor groove (order: AAAT; AATA; AATC; AATT; AAAA; AAGT; GAAT; GAAA; TAAT; AAAC) per 1kb along a representative minor satellite array (SRR11606870_111923)
 3. SRR11606870_Maj_tetranucleotides_average.fasta - Number of tetranucleotides with narrow major groove per 234bp of 500 major satellite arrays (find averages at the end of the file)
 4. SRR11606870_Min_tetranucleotides_average.fasta - Number of tetranucleotides with narrow minor groove per 234bp of 500 minor satellite arrays (find averages at the end of the file)
 5. SRR11606870_Maj_ATstretches_average.fasta - Number of AT stretches (default: minimum 4) per 234bp of 500 major satellite arrays (find averages at the end of the file)
