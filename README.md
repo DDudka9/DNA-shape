@@ -1,11 +1,11 @@
 # DNA-shape
-Based on long read SRR11606870 assembly of _Mus musculus_ (Ton et al., Scientific Data 2020; PMID: 33203859), 
+Based on long read SRR11606870 assembly of _Mus musculus_ genome (Ton et al., Scientific Data 2020; PMID: 33203859), 
 and using Packiaraj and Thakur 2024 Genome Biol (PMID: 38378611) major and minor satellite reads as templates, the scripts allow computing:
 1. Number of contiguous A/T stretches (default set to length of 4)
 2. Number of tetranucleotides associated with narrow minor groove (Rohs et al., 2009 Nature; PMID: 19865164)
 
 Requirements:
-1. Operating system: MacOS Ventura
+1. Operating system tested: MacOS Ventura
 2. Language: Python 3.11
 3. Modules: biopython==1.83; mkl-service==2.4.0; regex==2024.5.15
 
