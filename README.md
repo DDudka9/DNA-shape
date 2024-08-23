@@ -5,7 +5,7 @@ and using Packiaraj and Thakur 2024 Genome Biol (PMID: 38378611) major and minor
 2. Number of tetranucleotides associated with narrow minor groove (Rohs et al., 2009 Nature; PMID: 19865164)
 
 Requirements:
-1. Operating system tested: MacOS Ventura
+1. Operating system tested: MacOS (M1) Ventura
 2. Language: Python 3.11
 3. Modules: biopython==1.83; mkl-service==2.4.0; regex==2024.5.15
 
